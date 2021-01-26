@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/프라고고.css">
+		<!--[if lt IE 9]>
+		<script sec="http://html5shiv.googlecode.com/trunk/html5.js"></script>
+		<![endif]-->
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$(window).scroll( function(){
+					$('.summary').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).animate({'opacity':'1'},1000);
+						}	
+					});
+
+					$('.goal').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).animate({'opacity':'1'},1000);
+						}	
+					});
+				});
+
+				$( 'html, body' ).stop().animate( { scrollTop : 0 })
+			});
+		</script>
+	</head>
+	
+	<body>
+		<header>
+			<div class="head_img">
+				<a href="http://me5290.dothome.co.kr/plagogo/home1.html">
+					<img src="images/desk_img1.png" width="800px" height="640px">
+				</a>
+			</div>
+			<div class="move_site">
+				<ul class="site_btn">
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/home1.html">
+								Main site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/plamodel.html">
+								프라모델 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/Detailpage%20-%20product.html">
+								프라모델 상세 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/onepiece.html">
+								피규어 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/custom.html">
+								커스텀 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/community.html">
+								커뮤니티 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/customdetail.html">
+								커뮤니티 상세 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/loginpage.html">
+								로그인 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/plajoin.html">
+								회원가입 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/mymenu.html">
+								마이메뉴 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/jangbaguni.html">
+								장바구니 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/order.html">
+								주문/결제 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/delivery.html">
+								주문/배송 조회 site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/plagogo/center.html">
+								고객센터 site →
+							</a>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<section>
+			<div class="con_box1">
+				<div class="summary">
+					<h2>01. 개요</h2>
+					<ul>
+						<li>제작기간 :</li>
+						<li>프로그램 :</li>
+						<li>VIEWPORT :</li>
+						<li>참여도 :</li>
+						<li>설명 :</li>
+					</ul>
+					<ol>
+						<li>2020.10 ~ 2020.11</li>
+						<li>html5,css3,illustrator,photoshop</li>
+						<li>DESKTOP</li>
+						<li>4명이서 팀 프로젝트로 진행</li>
+						<li>html5와 css3를 배우고 나서 처음 시작한 프로젝트 입니다. 조별 프로젝트로 진행 되었고 저 포함 4명이서 제작 하였습니다. 프라모델,피규어 같은 장난감에 어울리는 색상을 정하고 단순한 구매 사이트가 아닌 다양한 종류의 상품과 소통할수 있는 갤러리 그리고 유저간의 거래까지 가능하도록 정하고 제작하였습니다.</li>
+					</ol>
+				</div>
+			</div>
+			<div class="con_box2">
+				<div class="goal">
+					<h2>02. 목표</h2>
+					<ul>
+						<li>
+							<img>
+							<h3>색다른 유저간의 거래</h3>
+							<p>기존 사이트와는 다르게 유저간의 거래 기능을 만든다.</p>
+						</li>
+						<li>
+							<img>
+							<h3>깔끔하고 간결한 디자인</h3>
+							<p>간결한 디자인으로 사용자가 보다 쉽게 이용 할수 있게 한다.</p>
+						</li>
+						<li>
+							<img>
+							<h3>세부적인 상품의 구분</h3>
+							<p>세부적으로 상품들을 나누어 쉽게 원하는 상품을 찾을수 있게 한다.</p>
+						</li>
+					</ul>
+					<div class="project_goal">
+						<h4>Project goal</h4>
+						<p>기존 사이트들은 거래와 상품판매를 동시에 하는 사이트가 없었습니다. 그래서 그 기능을 넣었으면 좋겠다 생각하여 추가하게 되었고 복잡하지 않고 간결한 디자인으로 사용자의 편의성을 고려하여 제작한다.</p>
+					</div>
+				</div>
+			</div>
+			<div class="con_box3">
+				<div class="color">
+					<h2>03. Color & Font</h2>
+					<ul>
+						<li>
+							<img src="images/pla_color1.png">
+							<p>#E02C26</p>
+						</li>
+						<li>
+							<img src="images/pla_color2.png">
+							<p>#F7922C</p>
+						</li>
+						<li>
+							<img src="images/pla_color3.png">
+							<p>#009444</p>
+						</li>
+						<li>
+							<img src="images/pla_color4.png">
+							<p>#262262</p>
+						</li>
+					</ul>
+				</div>
+				<div class="font">
+					<p>맑은고딕 Bold</p>
+					<p>맑은고딕 Regular</p>
+					<p>Arial Bold</p>
+					<p>Arial Regular</p>
+				</div>
+				<div class="detail">
+					<p>프라모델의 색상과 장난감에 어울리는 색상으로 골라 최대한 사용자들이 친근감을 느끼게 하였습니다.</p>
+				</div>
+			</div>
+			<div class="con_box4">
+				<div class="wire_sketch">
+					<h2>04. Wire Sketch</h2>
+					<ul>
+						<li>
+							<img src="images/pla_sketch1.png" alt="메인 페이지 스케치">
+							<p>메인 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch2.png" alt="카테고리 페이지 스케치">
+							<p>카테고리 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch3.png" alt="제품 상세 페이지 스케치">
+							<p>제품 상세 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch4.png" alt="커뮤니티 페이지 스케치">
+							<p>커뮤니티 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch5.png" alt="커뮤니티 상세 페이지 스케치">
+							<p>커뮤니티 상세 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch6.png" alt="마이메뉴-주문/배송 페이지 스케치">
+							<p>마이메뉴-주문/배송 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch7.png" alt="로그인 페이지 스케치">
+							<p>로그인 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch8.png" alt="회원가입 페이지 스케치">
+							<p>회원가입 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch9.png" alt="장바구니 페이지 스케치">
+							<p>장바구니 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/pla_sketch10.png" alt="고객센터 페이지 스케치">
+							<p>고객센터 페이지 스케치</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<button onclick="$('html, body').stop().animate( { scrollTop : 0 } );">
+				<a href="#">
+					맨 위로 가기 ↑
+				</a>
+			</button>
+		</section>
+	</body>
+</html>
