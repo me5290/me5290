@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>이민형 포트폴리오</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/portfolio.css">
+		<!--[if lt IE 9]>
+		<script sec="http://html5shiv.googlecode.com/trunk/html5.js"></script>
+		<![endif]-->
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.2/velocity.min.js"></script>
+		<script>
+			$(function(){
+				//별 배경 시작
+				var c = document.getElementById("canv");
+				var q = c.getContext("2d");
+
+				var w = c.width = window.innerWidth;
+				var h = c.height = window.innerHeight;
+
+				var arr = [];
+				var u = 0;
+				var dep = w;
+				var dp = 0.70;
+				var ms = {
+				  x: 0,
+				  y: 0
+				};
+				var msd = {
+				  x: 0,
+				  y: 0
+				};
+
+				function Obj(x, y, z) {
+				  this.set(x, y, z);
+				}
+
+				Obj.prototype = {
+				  set: function(x, y, z) {
+					this.x = x || 0;
+					this.y = y || 0;
+					this.z = z || 0;
+				  },
+				  rotX: function(ang) {
+					var y = this.y;
+					var z = this.z;
+					this.y = y * Math.cos(ang) - z * Math.sin(ang);
+					this.z = z * Math.cos(ang) + y * Math.sin(ang);
+				  },
+				  rotY: function(ang) {
+					var x = this.x;
+					var z = this.z;
+					this.x = x * Math.cos(ang) - z * Math.sin(ang);
+					this.z = z * Math.cos(ang) + x * Math.sin(ang);
+				  },
+				  rotZ: function(ang) {
+					var x = this.x;
+					var y = this.y;
+					this.x = x * Math.cos(ang) - y * Math.sin(ang);
+					this.y = y * Math.cos(ang) + x * Math.sin(ang);
+				  }
+				};
+
+				function Part(x, y, z) {
+				  this.op = new Obj(x, y, z);
+				  this.rp = new Obj(x, y, z);
+				  this.rot = new Obj();
+				  this.vel = new Obj();
+				  this.col = 'hsla(216,95%,85%,'+rnd(0.5, 1)+')';
+				}
+
+				function upd(rot) {
+				  var pos;
+				  var rot;
+				  var vel;
+				  var op;
+				  var rp;
+				  var col;
+				  var size;
+				  for (var i in arr) {
+					op = arr[i].op;
+					rp = arr[i].rp;
+					rot = arr[i].rot;
+					vel = arr[i].vel;
+					col = arr[i].col;
+					vel.x += msd.x * 0.15;
+					vel.y += msd.y * 0.15;
+					rp.set(op.x, op.y, op.z);
+
+					rot.x += vel.x;
+					rot.y += vel.y;
+					rot.z += vel.z;
+
+					rot.x = rot.x > Math.PI * 2 ? 0 : rot.x;
+					rot.y = rot.y > Math.PI * 2 ? 0 : rot.y;
+
+					rp.rotY(rot.y);
+					rp.rotX(rot.x);
+
+					vel.set(
+					  vel.x * dp,
+					  vel.y * dp,
+					  0
+					);
+				  }
+				  msd.x = 0.0005;
+				  msd.y = 0.0005;
+				}
+
+				function draw() {
+				  var t = "".split("").join(String.fromCharCode(0x2004));
+				  var p, dth;
+				  for (var i in arr) {
+					p = arr[i];
+					dth = ((p.rp.z / dep) + 1);
+					q.fillStyle = p.col;
+					q.fillRect(w + p.rp.x, h + p.rp.y, rnd(dth/0.8, dth/2),  dth/0.9);
+				  }
+				}
+
+				function rnd(min, max) {
+				  return Math.random() * (max - min) + min;
+				}
+
+				function go() {
+				  for (var i = 0; i < 6800; i++) {
+					var d = new Part(
+					  rnd(-w, h),
+					  rnd(-w, h),
+					  rnd(-dep, dep)
+					);
+					d.vel.set(0, 0, 0);
+					arr.push(d);
+				  }
+				}
+
+				window.addEventListener('touchmove', function(e) {
+				  e.preventDefault();
+				  msd.x = (e.touches[0].clientY - ms.y) / w;
+				  msd.y = (e.touches[0].clientX - ms.x) / h;
+				  ms.x = e.touches[0].clientX;
+				  ms.y = e.touches[0].clientY;
+				}, false);
+
+				window.addEventListener('resize', function(e) {
+				  c.width = w = window.innerWidth;
+				  c.height = h = window.innerHeight;
+				}, false);
+
+				function run() {
+				  q.clearRect(0, 0, w, h);
+				  var g_ = q.createLinearGradient(c.width + c.width,
+					c.height + c.height * 1.5,
+					c.width + c.width, 1);
+
+				  q.globalCompositeOperation = 'normal';
+				  q.fillStyle = g_;
+				  q.fillRect(0, 0, w, h);
+				  q.globalCompositeOperation = 'lighter';
+				  upd();
+				  draw();
+				  window.requestAnimationFrame(run);
+				}
+
+				go();
+				run();
+				//별 배경 끝
+				//햄버거 시작
+				var McButton = $("[data=hamburger-menu]");
+				var McBar1 = McButton.find("b:nth-child(1)");
+				var McBar2 = McButton.find("b:nth-child(2)");
+				var McBar3 = McButton.find("b:nth-child(3)");
+
+				McButton.click(function () {
+				  $(this).toggleClass("active");
+
+				  if (McButton.hasClass("active")) {
+					McBar1.velocity({ top: "50%" }, { duration: 200, easing: "swing" });
+					McBar3.velocity({ top: "50%" }, { duration: 200, easing: "swing" }).
+					velocity({ rotateZ: "90deg" }, { duration: 800, delay: 200, easing: [500, 20] });
+					McButton.velocity({ rotateZ: "135deg" }, { duration: 800, delay: 200, easing: [500, 20] });
+				  } else {
+					McButton.velocity("reverse");
+					McBar3.velocity({ rotateZ: "0deg" }, { duration: 800, easing: [500, 20] }).
+					velocity({ top: "100%" }, { duration: 200, easing: "swing" });
+					McBar1.velocity("reverse", { delay: 800 });
+				  }
+				});
+				//햄버거 끝
+				//풀 네비 시작
+				var burger = $('.McButton');
+				var menu = $('.full-menu');
+				var navItems =$('.nav__item');
+				  
+				burger.click(function(){
+					burger.toggleClass('.McButton');
+					menu.toggleClass('menu--open');
+				});
+				  
+				navItems.hover(function(){
+					navItems.not($(this)).toggleClass('nav__item--hover');
+				});
+				//풀 네비 끝
+				//contact_popup_start
+				$(".con_bg .contact_btn").on('click', function(e) {
+					e.preventDefault();
+					$(".contactMe").fadeIn();
+				})
+				$(".contactMe .close2").on('click', function(e) {
+					e.preventDefault();
+					$(".contactMe").fadeOut();
+				})
+				//contact_popup_end
+			});
+			  //스크롤 시작
+			$(function() {
+				$(window).scroll( function(){
+					$('.me').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).animate({'right':'80px'},1000);
+						}	
+					});
+
+					$('.me>img').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+
+						if( bottom_of_window > bottom_of_element ){
+							$(this).delay(2000).animate({'opacity':'1'},3000);
+						}
+					});
+
+					$('.information,.me>ol').each( function(i){	
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+						
+						if( bottom_of_window > bottom_of_element ){
+							$(this).delay(2000).animate({'opacity':'1'},3000);
+						}
+					});
+
+					$('.skill_box').each( function(i){	
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).animate({'left':'80px'},1000);
+						}
+					});
+
+					$('.skillbar').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).find('.skillbar-bar').delay(2000).animate({
+								width:$(this).attr('data-percent')
+							},3000);
+						}
+					});
+
+					$('.about_box>img').each( function(i){	
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+						
+						if( bottom_of_window > bottom_of_element ){
+							$(this).delay(2000).animate({'opacity':'1'},3000);
+						}
+					});
+
+					//가로 스크롤 시작
+					var lastScroll = 0;
+					$(window).scroll(function(event){
+
+						var scroll = $(this).scrollTop();
+
+						if (scroll > 1300){
+						//이벤트를 적용시킬 스크롤 높이
+							$(".container1").addClass("horizontal");
+						}else {
+							$(".container1").removeClass("horizontal");
+						}
+
+						/*if (scroll > 9000){
+						//이벤트를 적용시킬 스크롤 높이
+							$(".container1").addClass("vertical");
+						}else {
+							$(".container1").removeClass("vertical");
+						}*/
+
+						lastScroll = scroll;
+					});
+					//가로 스크롤 끝
+
+					var scrollValue = $('html').scrollTop(); console.log(scrollValue);
+				});
+			});
+			//스크롤 끝
+		</script>
+	</head>
+	
+	<body class="active">
+		<header>
+			<a class="McButton" data="hamburger-menu">
+				<b></b>
+				<b></b>
+				<b></b>
+			</a>
+			<div class="full-menu">
+				<div class="layer"></div>
+				<nav class="nav">
+					<ul class="nav__list">
+						<li class="nav__item">
+							<button  onclick="j_section(0)">
+								<a href="#" class="nav__link">
+									INTRO
+								</a>
+							</button>
+						</li>
+						<li class="nav__item">
+							<button  onclick="j_section(1)">
+								<a href="#" class="nav__link">
+									ABOUT ME
+								</a>
+							</button>
+						</li>
+						<li class="nav__item">
+							<button  onclick="j_section(2)">
+								<a href="#" class="nav__link">
+									PORTFOLIO
+								</a>
+							</button>
+						</li>
+						<li class="nav__item">
+							<button  onclick="j_section(3)">
+								<a href="#" class="nav__link">
+									CONTACT
+								</a>
+							</button>
+						</li>
+					</ul>
+					<script>
+						//클릭 스크롤 시작
+						function j_section(n){
+							$('html').stop().animate({
+								scrollTop : $('section').eq(n).offset().top
+							});
+						}
+						//클릭 스크롤 끝
+					</script>
+				</nav>
+			</div>
+		</header>
+		<section id="intro">
+			<div class="container">
+				<div class="sky">
+					<canvas id='canv'></canvas>
+					<div class="shooting-stars">
+					</div>
+				</div>
+			</div>
+			<div class="box1">
+				<div class="introduce">
+					<h2>Min Hyeong Story</h2>
+				</div>
+			</div>
+		</section>
+		<div id="parallax_page">
+			<div class="parallax">
+				<div class="parallax_img">
+					<img src="images/cloud3.png" alt="구름">
+				</div>
+				<div class="parallax_img">
+					<img src="images/back.png" alt="뒤쪽 풀">
+				</div>
+				<div class="parallax_img">
+					<img src="images/floor.png" alt="바닥">
+				</div>
+				<div class="parallax_img">
+					<img src="images/front.png" alt="앞쪽 풀">
+				</div>
+				<div class="parallax_img">
+					<img src="images/work_door.png" alt="계단과 핸드폰 문">
+				</div>
+				<div class="parallax_img">
+					<img src="images/man.png" alt="사람">
+				</div>
+				<div class="parallax_img">
+					<img src="images/grass.png" alt="잔디">
+				</div>
+				<div class="parallax_contents">
+					<h2>Hello :-)</h2>
+					<p>안녕하세요,신입 웹 퍼블리셔 '이민형' 입니다.<br>사용자를 위해 친화적인 인터페이스를 구성하여 쉽게 페이지를 찾아볼 수 있도록 하며<br>책임감을 가지고 꼼꼼함과 열정을 바탕으로 성장하는<br>디자이너,퍼블리셔가 되도록 노력 하겠습니다.</p>
+				</div>
+			</div>
+		</div>
+		<div id="section_wrap">
+		<div class="container1" data-1300="transform:translateX(0%;)" data-10000="transform:tranlateX(-400%;)">
+			<section id="about">
+				<div class="about_wrap">
+					<div class="about_box">
+					<img src="images/me_img.png">
+					<div class="me">
+						<img src="images/me.jpg" width="250" height="300">
+						<ul class="information">
+							<li>이름</li>
+							<li>생년월일</li>
+							<li>휴대전화</li>
+							<li>이메일</li>
+							<li>거주지</li>
+						</ul>
+						<ol>
+							<li>이민형</li>
+							<li>1997.10.07</li>
+							<li>010-7722-6668</li>
+							<li>me5290@naver.com</li>
+							<li>경기도 안양시 만안구 안양2동</li>
+						</ol>
+						<p>저는 사용자들이 즐길수 있는 편리한 웹 사이트를 만들고 싶습니다.<br>하지만 아직 부족한 점이 많습니다. 그래도 포기하지않고 한 걸음이라도 ‘매일 꾸준히!’라는 마음가짐으로<br>책임감을 가지고 부족한 점을 빠르게 습득하여 뒤쳐지지 않도록 노력하겠습니다.</p>
+						<ul class="keyword">
+							<li>KEYWORD</li>
+							<li>#배려심</li>
+							<li>#광고디자인과</li>
+							<li>#반응형</li>
+							<li>#책임감</li>
+							<li>#무한도전</li>
+						</ul>
+					</div>
+					</div>
+					<div class="about_box">
+					<img src="images/skill_img.png">
+					<div class="skill_box">
+						<ul class="skill_img">
+							<li>
+								<img src="images/html5.png" width="70" height="70">
+							</li>
+							<li>
+								<img src="images/css3.png" width="70" height="70">
+							</li>
+							<li>
+								<img src="images/illustrator.png" width="70" height="70">
+							</li>
+							<li>
+								<img src="images/photoshop.png" width="70" height="70">
+							</li>
+							<li>
+								<img src="images/javascript.png" width="70" height="70">
+							</li>
+							<li>
+								<img src="images/jquery.png" width="70" height="70">
+							</li>
+						</ul>
+						<div class="skillbar clearfix " data-percent="85%">
+							<div class="skillbar-title" style="background:#c11a1a;"><span>HTML5</span></div>
+							<div class="skillbar-bar" style="background:#fd3131;"></div>
+							<div class="skill-bar-percent">85%</div>
+						</div>
+						<div class="skillbar clearfix " data-percent="85%">
+							<div class="skillbar-title" style="background:#2980b9;"><span>CSS3</span></div>
+							<div class="skillbar-bar" style="background:#3498db;"></div>
+							<div class="skill-bar-percent">85%</div>
+						</div>
+						<div class="skillbar clearfix " data-percent="90%">
+							<div class="skillbar-title" style="background:#af5710;"><span>ILLUSTRATOR</span></div>
+							<div class="skillbar-bar" style="background:#ff7f18;"></div>
+							<div class="skill-bar-percent">90%</div>
+						</div>
+						<div class="skillbar clearfix " data-percent="85%">
+							<div class="skillbar-title" style="background:#0b830e;"><span>PHOTOSHOP</span></div>
+							<div class="skillbar-bar" style="background:#13d917;"></div>
+							<div class="skill-bar-percent">85%</div>
+						</div>
+						<div class="skillbar clearfix " data-percent="60%">
+							<div class="skillbar-title" style="background:#d6ba32;"><span>JAVASCRIPT</span></div>
+							<div class="skillbar-bar" style="background:#feda3e;"></div>
+							<div class="skill-bar-percent">60%</div>
+						</div>
+						<div class="skillbar clearfix " data-percent="70%">
+							<div class="skillbar-title" style="background:#77068f;"><span>JQUERY</span></div>
+							<div class="skillbar-bar" style="background:#d530f8;"></div>
+							<div class="skill-bar-percent">70%</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</section>
+			<section id="portfolio">
+				<div id="work">
+					<ul>
+						<li>
+							<a href="프라고고%20상세페이지.html">
+								<img src="images/plagogo_view.png">
+								<div class="blackHover">
+									<div class="project_info">
+										<h2>프라모델 구입 및 거래 사이트</h2>
+										<h3>Plagogo</h3>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="조프리%20상세페이지.html">
+								<img src="images/jopre_view.png">
+								<div class="blackHover">
+									<div class="project_info">
+										<h2>싸고 다양한 게임 스토어</h2>
+										<h3>Jopre</h3>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="원모어%20상세페이지.html">
+								<img src="images/one_view.png">
+								<div class="blackHover">
+									<div class="project_info">
+										<h2>다양한 커피와 디저트를 갖춘 카페</h2>
+										<h3>One More</h3>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section id="contact">
+				<img src="images/contact_bg.png">
+				<div class="con_bg">
+					<a href="#"><div class="contact_btn"></div></a>
+					<h1>CONTACT ME</h1>
+					<div class="contactMe">
+						<h2>CONTACT ME</h2>
+						<div class="close2">
+							<a href="#">
+							<img src="images/close.png" width="36px;" height="36px">
+								</a>
+						</div>
+						<p>Whether you’re looking for answers, would like to want to let me know how I did,<br>you’ll find many ways to contact me right here.</p>
+						<ul class="contact_icon">
+							<li>
+								<img src="images/call.png" width="20px" height="20px">
+								<span>: 010 - 7722 - 6668</span>
+							</li>
+							<li>
+								<img src="images/talk.png" width="20px" height="20px">
+								<span>: (Kakao ID) me5290</span>
+							</li>
+							<li>
+								<img src="images/email.png" width="25px" height="20px">
+							<span>: me5290@naver.com</span>
+							</li>
+						</ul>
+						<div class="border"></div>
+						<form method="POST" action="https://formspree.io/f/mrgojjzr">
+							<input type="email" name="email" placeholder="Your email" style="width:100%">
+							<input type="hidden" name="_subject" value="Promokit Message">
+							<textarea name="message" placeholder="Your Message" style="height:130px; width:100%"></textarea>
+							<button type="submit" value="send">Send</button>
+						</form>
+					</div>
+				</div>
+			</section>
+		</div>
+		</div>
+		<script type="text/javascript" src="js/skrollr.js"></script>
+		<script type="text/javascript">
+			var s = skrollr.init();
+		</script>
+	</body>
+</html>

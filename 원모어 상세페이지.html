@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/원모어.css">
+		<!--[if lt IE 9]>
+		<script sec="http://html5shiv.googlecode.com/trunk/html5.js"></script>
+		<![endif]-->
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$(window).scroll( function(){
+					$('.summary').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).animate({'left':'250px'},2000);
+						}	
+					});
+
+					$('.goal').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).animate({'left':'250px'},2000);
+						}	
+					});
+
+					$('.project_goal').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).delay(2500).animate({'opacity':'1'},2000);
+						}	
+					});
+
+					$('.color,.font,.detail').each( function(i){
+						var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+						var bottom_of_window = $(window).scrollTop() + $(window).height();
+							
+						if( bottom_of_window > bottom_of_element ){
+							$(this).animate({'opacity':'1'},3000);
+						}	
+					});
+
+					var scrollValue = $('html').scrollTop(); console.log(scrollValue);
+				});
+
+				//슬라이드 시작
+				var $bnnNum=0;
+				$('.next').click(function(e){
+					e.preventDefault();
+					if($bnnNum>=3)return false;
+					$bnnNum++;
+					var $book_w=$('.wire_sketch').width();
+					console.log($book_w);
+					$('.wire_sketch>ul').animate({'left':-$book_w*$bnnNum},1000,function(){
+						$('#slide-roll img').attr('src','images/roll_out.png');
+						$('#slide-roll img')
+						.eq($bnnNum).attr('src','images/roll_over.png');
+					});
+				});
+				$('.prev').click(function(e){
+					e.preventDefault();
+					if($bnnNum<=0)return false;
+					$bnnNum--;
+					var $book_w=$('.wire_sketch').width();
+					$('.wire_sketch>ul').animate({'left':-$book_w*$bnnNum},1000,function(){
+						$('#slide-roll img').attr('src','images/roll_out.png');
+						$('#slide-roll img')
+						.eq($bnnNum).attr('src','images/roll_over.png');
+					});
+				});
+				//슬라이드 끝
+
+				$( 'html, body' ).stop().animate( { scrollTop : 0 })
+			});
+		</script>
+	</head>
+	
+	<body data-0="background:rgba(255, 255, 255, 1)" data-1200="background:rgba(200, 248, 222, 1)" data-2100="background:rgba(207, 239, 249, 1)" data-3000="background:rgba(248, 249, 207, 1)" data-4200="background:rgba(249, 207, 243, 1)">
+		<header>
+			<div class="head_img">
+				<a href="http://me5290.dothome.co.kr/one%20more/main.html">
+					<img src="images/desk_img3.png" width="850px" height="650px">
+				</a>
+			</div>
+			<div class="move_site">
+				<ul class="site_btn">
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/one%20more/main.html">
+								Main site →
+							</a>
+						</button>
+					</li>
+					<li>
+						<button class="site">
+							<a href="http://me5290.dothome.co.kr/one%20more/sub.html">
+								Sub site →
+							</a>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<section>
+			<div class="con_box1">
+				<div class="summary">
+					<h2>01. 개요</h2>
+					<ul>
+						<li>제작기간 :</li>
+						<li>프로그램 :</li>
+						<li>VIEWPORT :</li>
+						<li>참여도 :</li>
+						<li>설명 :</li>
+					</ul>
+					<ol>
+						<li>2020.12 ~ 2021.01</li>
+						<li>html5,css3,illustrator,photoshop,javascript,jquery</li>
+						<li>RESPONSIVE (DESKTOP,PHONE)</li>
+						<li>100%</li>
+						<li>동적인 요소들을 많이 넣어 제작해 보았습니다. 반응형으로 데스크탑과 모바일까지 가능하게 만들었고 심심하지 않은 디자인과 편하게 이용할수 있도록 제작 했습니다.</li>
+					</ol>
+				</div>
+			</div>
+			<div class="con_box2">
+				<div class="goal">
+					<h2>02. 목표</h2>
+					<ul>
+						<li>
+							<img>
+							<h3>사용자의 흥미 유발</h3>
+							<p>다양한 애니메이션 효과로 흥미를 갖게한다.</p>
+						</li>
+						<li>
+							<img>
+							<h3>컨셉에 어울리는 디자인</h3>
+							<p>컨셉에 맞게 달콤하면서 내츄럴한 느낌의 디자인을 한다.</p>
+						</li>
+						<li>
+							<img>
+							<h3>세부적인 컨텐츠</h3>
+							<p>세부적으로 나누어 정확하게 원하는 종류의 컨텐츠를 고를수 있게 한다.</p>
+						</li>
+					</ul>
+					<div class="project_goal">
+						<h4>Project goal</h4>
+						<p>동적인 요소들을 많이 추가하여 심심하지 않게 사용자가 흥미를 갖게하며 세부적인 컨텐츠로 편하고 정확하게 이용할수 있게 제작한다.</p>
+					</div>
+				</div>
+			</div>
+			<div class="con_box3">
+				<div class="color">
+					<h2>03. Color & Font</h2>
+					<ul>
+						<li>
+							<img src="images/one_color1.png">
+							<p>#FD25BD</p>
+						</li>
+						<li>
+							<img src="images/one_color2.png">
+							<p>#76711F</p>
+						</li>
+						<li>
+							<img src="images/one_color3.png">
+							<p>#F7F396</p>
+						</li>
+						<li>
+							<img src="images/one_color4.png">
+							<p>#6d440c</p>
+						</li>
+					</ul>
+				</div>
+				<div class="font">
+					<p>맑은고딕 Bold</p>
+					<p>맑은고딕 Regular</p>
+					<p>Arial Bold</p>
+					<p>Arial Regular</p>
+				</div>
+				<div class="detail">
+					<p>카페에 어울리는 커피색과 내츄럴한 느낌의 색상을 선택하고 디저트를 연상케하는 달콤한 느낌을 주는 색상도 선택 하였습니다. 폰트는 둥글둥글한 폰트를 쓰려 했지만 찾았던 폰트가 지원이 되지 않아 기본적이지만 깔끔한 맑은고딕과 Arial로 대체 하였습니다.</p>
+				</div>
+			</div>
+			<div class="con_box4">
+				<h2>04. Wire Sketch</h2>
+				<div class="wire_sketch">
+					<ul>
+						<li>
+							<img src="images/one_sketch1.png" alt="메인 페이지 스케치">
+							<p>메인 페이지 스케치</p>
+						</li>
+						<li>
+							<img src="images/one_sketch2.png" alt="서브 페이지 스케치">
+							<p>서브 페이지 스케치</p>
+						</li>
+					</ul>
+				</div>
+				<div class="arrow">
+					<a href="#" class="prev" onclick="">
+						<img src="images/left_btn.png" width="120px" height="250px;">
+					</a>
+					<a href="#" class="next" onclick="">
+						<img src="images/right_btn.png" width="120px" height="250px;">
+					</a>
+				</div>
+			</div>
+			<div class="con_box5">
+				<button onclick="$('html, body').stop().animate( { scrollTop : 0 } );">
+					<a href="#">
+						맨 위로 가기 ↑
+					</a>
+				</button>
+			</div>
+		</section>
+		<script type="text/javascript" src="js/skrollr.js"></script>
+		<script type="text/javascript">
+			var s = skrollr.init();
+		</script>
+	</body>
+</html>
